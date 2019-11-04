@@ -205,7 +205,7 @@ class FacetSet extends RequestBuilder implements ComponentRequestBuilderInterfac
             'facet.range',
             $this->renderLocalParams(
                 $field,
-                ['key' => $facet->getKey(), 'ex' => $facet->getExcludes()]
+                ['key' => $facet->getKey(), 'tag' => $facet->getTag(), 'ex' => $facet->getExcludes()]
             )
         );
 
@@ -221,6 +221,22 @@ class FacetSet extends RequestBuilder implements ComponentRequestBuilderInterfac
 
         foreach ($facet->getInclude() as $includeValue) {
             $request->addParam("f.$field.facet.range.include", $includeValue);
+        }
+
+        if (null !== $pivot = $facet->getPivot()) {
+            $link = $facet->getTag() ?: $facet->getKey();
+
+            if (!is_array($pivot)) {
+                $pivot = array($pivot);
+            }
+
+            $request->addParam(
+                'facet.pivot',
+                $this->renderLocalParams(
+                    implode(',', $pivot),
+                    [FacetsetComponent::FACET_RANGE => $link]
+                )
+            );
         }
     }
 

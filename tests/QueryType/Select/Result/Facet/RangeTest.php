@@ -26,6 +26,8 @@ class RangeTest extends TestCase
 
     protected $gap;
 
+    protected $pivot;
+
     public function setUp(): void
     {
         $this->values = [
@@ -40,6 +42,7 @@ class RangeTest extends TestCase
         $this->start = '10.0';
         $this->end = '40.0';
         $this->gap = '10.0';
+        $this->pivot = null;
 
         $this->facet = new Range(
             $this->values,
@@ -48,7 +51,8 @@ class RangeTest extends TestCase
             $this->between,
             $this->start,
             $this->end,
-            $this->gap
+            $this->gap,
+            $this->pivot
         );
     }
 
