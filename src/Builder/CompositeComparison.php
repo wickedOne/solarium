@@ -9,8 +9,6 @@ use Solarium\Exception\RuntimeException;
 /**
  * Composite Expression.
  *
- * @codeCoverageIgnore
- *
  * @author wicliff <wicliff.wolda@gmail.com>
  */
 class CompositeComparison implements ExpressionInterface
